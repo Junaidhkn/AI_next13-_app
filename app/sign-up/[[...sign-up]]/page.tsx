@@ -5,9 +5,8 @@ const SignUpPage = () => {
     <main className="w-screen h-screen flex justify-center items-center">
       <SignUp
         path="/sign-up"
-        routing="path"
-        signInUrl="/sign-in"
-        redirectUrl="/journal"
+        afterSignUpUrl="/new-user"
+        redirectUrl="/new-user"
       />
     </main>
   )
