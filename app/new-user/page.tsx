@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation'
 
 const createUser = async () => {
   const user = (await currentUser()) as any
-  console.log(user)
 
   const match = await prisma.user.findUnique({
     where: {
@@ -16,15 +15,20 @@ const createUser = async () => {
     await prisma.user.create({
       data: {
         clerkId: user.id as string,
-        email: user.email as string,
+        email: user?.emailAddresses[0].emailAddress as string,
       },
     })
   }
   redirect('/journal')
 }
 
-const NewUserPage = () => {
-  return <div>new user page</div>
+const NewUserPage = async () => {
+  await createUser()
+  return (
+    <div className="w-screen h-screen bg-black flex justify-center items-center text-white text-8xl">
+      Loading ....
+    </div>
+  )
 }
 
 export default NewUserPage
