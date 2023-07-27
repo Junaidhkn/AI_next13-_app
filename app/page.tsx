@@ -1,4 +1,5 @@
 import { auth } from '@clerk/nextjs'
+import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
 export default async function Home() {
@@ -7,15 +8,12 @@ export default async function Home() {
 
   let links = [
     { href: '/journal', label: 'Journal' },
-    { href: '/sign-up', label: 'Sign Up' },
-    { href: '/sign-in', label: 'Sign In' },
+    { href: '/sign-up', label: 'SignUp' },
+    { href: '/sign-in', label: 'SignIn' },
   ]
   const isloggedIn = async () => {
     if (userId) {
-      return (links = [
-        { href: '/journal', label: 'Journal' },
-        { href: '/sign-out', label: 'Sign Out' },
-      ])
+      return (links = [{ href: '/journal', label: 'Journal' }])
     }
   }
   isloggedIn()
@@ -24,16 +22,21 @@ export default async function Home() {
     <>
       <nav className="bg-slate-800 text-white w-full h-16 absolute flex justify-between items-center">
         <h3 className="font-extrabold font-mono text-3xl ml-10">Emotrack</h3>
-        <ul className="flex justify-end items-center mx-16">
-          {links.map((link) => (
-            <li
-              key={link.href}
-              className="px-7 mx-5 cursor-pointer py-2 text-xl border border-gray-300 rounded-full"
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className="flex justify-center items-center mr-11">
+          <ul className="flex justify-end items-center mx-10">
+            {links.map((link) => (
+              <li
+                key={link.href}
+                className="px-7 mx-5 cursor-pointer py-2 text-lg border border-gray-300"
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+          <div className="h-full w-full">
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        </div>
       </nav>
       <main className="w-screen h-screen bg-black flex justify-center items-center text-white">
         <div className="w-full max-w-[600px] mx-auto mt-24">
