@@ -6,7 +6,7 @@ export default async function Home() {
   let link = userId ? '/journal' : '/new-user'
   return (
     <main className="w-screen h-screen bg-black flex justify-center items-center text-white">
-      <div className="w-full max-w-[600px] mx-auto">
+      <div className="w-full max-w-[600px] mx-auto mt-24">
         <h1 className="text-5xl mb-4">
           EmoTrack: Capturing Your Life&apos;s Emotional Journey with AI
         </h1>
