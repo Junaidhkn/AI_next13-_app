@@ -14,7 +14,7 @@ export const POST = async (request: Request) => {
           id: user.id,
         },
       },
-      analysis: {
+      EntryAnalysis: {
         create: {
           mood: 'Neutral',
           subject: 'None',
