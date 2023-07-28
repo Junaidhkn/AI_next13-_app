@@ -1,5 +1,5 @@
 'use client'
-import { updateEntry, deleteEntry } from '@/util/api'
+import { updateEntry, deleteEntry } from '@/utils/api'
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import Spinner from './Spinner'

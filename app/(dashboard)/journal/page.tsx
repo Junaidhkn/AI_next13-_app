@@ -17,10 +17,10 @@ const getEntries = async () => {
 }
 
 const JournalPage = async () => {
-  // const entries = await getEntries()
-  // console.log(entries)
+  const entries = await getEntries()
+  console.log(entries)
   return (
-    <div className="p-10">
+    <div className="p-10 bg-sky-400/10">
       <h2 className="text-3xl mb-8"></h2>
       <div className="grid grid-cols-3 gap-4">
         <NewEntryCard />

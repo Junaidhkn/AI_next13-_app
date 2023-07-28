@@ -1,6 +1,6 @@
 'use client'
 
-import { newEntry } from '@/util/api'
+import { newEntry } from '@/utils/api'
 import { revalidatePath } from 'next/cache'
 import { useRouter } from 'next/navigation'
 

@@ -2,7 +2,7 @@ import type { User } from '@clerk/nextjs/api'
 import { prisma } from './db'
 import { auth } from '@clerk/nextjs'
 
-export const getUserFromClerkID = async (select?: Partial<{ id: boolean }>) => {
+export const getUserFromClerkID = async (select = { id: true }) => {
   const { userId } = auth()
   const user = await prisma.user.findUniqueOrThrow({
     where: {
@@ -13,6 +13,7 @@ export const getUserFromClerkID = async (select?: Partial<{ id: boolean }>) => {
 
   return user
 }
+// select?: Partial<{ id: boolean }>
 
 export const syncNewUser = async (clerkUser: User) => {
   const existingUser = await prisma.user.findUnique({
