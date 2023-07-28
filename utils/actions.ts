@@ -2,4 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-export const update = (paths = []) => paths.forEach((p) => revalidatePath(p))
+type paths = string[]
+
+export const revalidate = (paths: paths) =>
+  paths.forEach((p) => revalidatePath(p))
