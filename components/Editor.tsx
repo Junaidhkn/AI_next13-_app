@@ -33,9 +33,7 @@ const Editor = ({ entry }: EditorProps) => {
     onSave: async (_text: string) => {
       if (_text === entry.content) return
       setIsSaving(true)
-
       const data = await updateEntry(entry.id, _text)
-      console.log('data', data)
       setEntry(data)
       setIsSaving(false)
     },
@@ -57,45 +55,49 @@ const Editor = ({ entry }: EditorProps) => {
           className="w-full h-full text-xl p-8"
         />
       </div>
-      {/* <div className="border-l border-black/5">
-        <div
-          style={{ background: currentEntry.EntryAnalysis.color }}
-          className="h-[100px] bg-blue-600 text-white p-8"
-        >
-          <h2 className="text-2xl bg-white/25 text-black">Analysis</h2>
-        </div>
-        <div>
-          <ul role="list" className="divide-y divide-gray-200">
-            <li className="py-4 px-8 flex items-center justify-between">
-              <div className="text-xl font-semibold w-1/3">Subject</div>
-              <div className="text-xl">
-                {currentEntry.EntryAnalysis.subject}
-              </div>
-            </li>
+      {currentEntry && (
+        <div className="border-l border-black/5">
+          <div
+            style={{
+              background: currentEntry.EntryAnalysis.color.toString(),
+            }}
+            className="h-[100px] bg-blue-600 text-white p-8"
+          >
+            <h2 className="text-2xl bg-white/25 text-black">Analysis</h2>
+          </div>
+          <div>
+            <ul role="list" className="divide-y divide-gray-200">
+              <li className="py-4 px-8 flex items-center justify-between">
+                <div className="text-xl font-semibold w-1/3">Subject</div>
+                <div className="text-xl">
+                  {currentEntry.EntryAnalysis.subject}
+                </div>
+              </li>
 
-            <li className="py-4 px-8 flex items-center justify-between">
-              <div className="text-xl font-semibold">Mood</div>
-              <div className="text-xl">{currentEntry.EntryAnalysis.mood}</div>
-            </li>
+              <li className="py-4 px-8 flex items-center justify-between">
+                <div className="text-xl font-semibold">Mood</div>
+                <div className="text-xl">{currentEntry.EntryAnalysis.mood}</div>
+              </li>
 
-            <li className="py-4 px-8 flex items-center justify-between">
-              <div className="text-xl font-semibold">Negative</div>
-              <div className="text-xl">
-                {currentEntry.EntryAnalysis.negative ? 'True' : 'False'}
-              </div>
-            </li>
-            <li className="py-4 px-8 flex items-center justify-between">
-              <button
-                onClick={handleDelete}
-                type="button"
-                className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-              >
-                Delete
-              </button>
-            </li>
-          </ul>
+              <li className="py-4 px-8 flex items-center justify-between">
+                <div className="text-xl font-semibold">Negative</div>
+                <div className="text-xl">
+                  {currentEntry.EntryAnalysis.negative ? 'True' : 'False'}
+                </div>
+              </li>
+              <li className="py-4 px-8 flex items-center justify-between">
+                <button
+                  onClick={handleDelete}
+                  type="button"
+                  className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                >
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div> */}
+      )}
     </div>
   )
 }

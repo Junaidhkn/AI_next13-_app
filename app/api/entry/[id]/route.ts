@@ -1,5 +1,5 @@
 import { revalidate } from '@/utils/actions'
-// import { analyzeEntry } from '@/utils/ai'
+import { analyzeEntry } from '@/utils/ai'
 import { getUserFromClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextResponse } from 'next/server'
@@ -42,21 +42,20 @@ export const PATCH = async (request: Request, { params }: Params) => {
     },
   })
 
-  // const analysis = await analyze(updatedEntry.content)
+  const analysis = await analyzeEntry(updatedEntry.content)
 
-  // const updated = await prisma.analysis.upsert({
-  //   where: {
-  //     entryId: updatedEntry.id,
-  //   },
-  //   create: {
-  //     userId: user.id,
-  //     entryId: updatedEntry.id,
-  //     ...analysis,
-  //   },
-  //   update: analysis,
-  // })
-  console.log('updatedEntry ::::', updatedEntry)
+  const updated = await prisma.entryAnalysis.upsert({
+    where: {
+      entryId: updatedEntry.id,
+    },
+    create: {
+      userId: user.id,
+      entryId: updatedEntry.id,
+      ...analysis,
+    },
+    update: analysis,
+  })
 
-  // return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
-  return NextResponse.json({ data: updatedEntry })
+  return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
+  // return NextResponse.json({ data: updatedEntry })
 }
