@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import Spinner from './Spinner'
 import { useRouter } from 'next/navigation'
-import { type } from 'os'
 
 type EditorProps = {
   entry: {
@@ -36,7 +35,7 @@ const Editor = ({ entry }: EditorProps) => {
       setIsSaving(true)
 
       const { data } = await updateEntry(entry.id, { content: _text })
-
+      console.log(data)
       setEntry(data)
       setIsSaving(false)
     },
