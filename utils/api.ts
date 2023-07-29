@@ -33,7 +33,7 @@ export const newEntry = async () => {
 
 export const updateEntry = async (id, content) => {
   const res = await fetch(
-    new Request(createURL(`/api/journal/${id}`), {
+    new Request(createURL(`/api/entry/${id}`), {
       method: 'PATCH',
       body: JSON.stringify({ content }),
     })
@@ -42,7 +42,7 @@ export const updateEntry = async (id, content) => {
   if (res.ok) {
     const data = await res.json()
     console.log('Data ::::', data)
-    return data
+    return data.data
   }
 }
 
