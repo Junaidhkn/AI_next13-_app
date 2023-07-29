@@ -7,8 +7,10 @@ const getEntry = async (id: string) => {
   const user = await getUserFromClerkID()
   const entry = await prisma.journalEntry.findUnique({
     where: {
-      userId: user.id,
-      id,
+      userId_id: {
+        userId: user.id,
+        id: id,
+      },
     },
     include: {
       EntryAnalysis: true,
@@ -23,8 +25,7 @@ const JournalEditorPage: React.FC<{ params: Params }> = async ({ params }) => {
 
   return (
     <div className="w-full h-full">
-      {entry?.content}
-      {/* <Editor entry={entry} /> */}
+      <Editor entry={entry} />
     </div>
   )
 }

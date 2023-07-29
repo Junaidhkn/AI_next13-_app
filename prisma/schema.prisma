@@ -33,7 +33,7 @@ model JournalEntry {
   user          User           @relation(fields: [userId], references: [id])
   EntryAnalysis EntryAnalysis?
 
-  @@index([userId])
+  @@unique([userId, id])
 }
 
 model EntryAnalysis {
