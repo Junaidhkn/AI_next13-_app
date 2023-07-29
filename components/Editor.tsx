@@ -34,8 +34,8 @@ const Editor = ({ entry }: EditorProps) => {
       if (_text === entry.content) return
       setIsSaving(true)
 
-      const { data } = await updateEntry(entry.id, { content: _text })
-      console.log(data)
+      const data = await updateEntry(entry.id, _text)
+      console.log('data', data)
       setEntry(data)
       setIsSaving(false)
     },
@@ -57,7 +57,7 @@ const Editor = ({ entry }: EditorProps) => {
           className="w-full h-full text-xl p-8"
         />
       </div>
-      <div className="border-l border-black/5">
+      {/* <div className="border-l border-black/5">
         <div
           style={{ background: currentEntry.EntryAnalysis.color }}
           className="h-[100px] bg-blue-600 text-white p-8"
@@ -95,7 +95,7 @@ const Editor = ({ entry }: EditorProps) => {
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

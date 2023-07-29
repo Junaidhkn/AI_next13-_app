@@ -1,5 +1,5 @@
 import { revalidate } from '@/utils/actions'
-import { analyzeEntry } from '@/utils/ai'
+// import { analyzeEntry } from '@/utils/ai'
 import { getUserFromClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextResponse } from 'next/server'
@@ -30,31 +30,33 @@ export const DELETE = async (request: Request, { params }: Params) => {
 export const PATCH = async (request: Request, { params }: Params) => {
   const { content } = await request.json()
   const user = await getUserFromClerkID()
-
-  const entry = await prisma.journalEntry.update({
+  const updatedEntry = await prisma.journalEntry.update({
     where: {
       userId_id: {
-        id: params.id,
         userId: user.id,
+        id: params.id,
       },
     },
-    data: content,
-  })
-
-  const analysis = await analyzeEntry(entry)
-  const savedAnalysis = await prisma.entryAnalysis.upsert({
-    where: {
-      entryId: entry.id,
-    },
-    update: { ...analysis },
-    create: {
-      entryId: entry.id,
-      userId: user.id,
-      ...analysis,
+    data: {
+      content: content,
     },
   })
 
-  revalidate(['/journal'])
+  // const analysis = await analyze(updatedEntry.content)
 
-  return NextResponse.json({ data: { ...entry, analysis: savedAnalysis } })
+  // const updated = await prisma.analysis.upsert({
+  //   where: {
+  //     entryId: updatedEntry.id,
+  //   },
+  //   create: {
+  //     userId: user.id,
+  //     entryId: updatedEntry.id,
+  //     ...analysis,
+  //   },
+  //   update: analysis,
+  // })
+  console.log('updatedEntry ::::', updatedEntry)
+
+  // return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
+  return NextResponse.json({ data: updatedEntry })
 }
