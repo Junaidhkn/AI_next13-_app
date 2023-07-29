@@ -20,7 +20,7 @@ const getEntries = async () => {
 const JournalPage = async () => {
   const entries = await getEntries()
   return (
-    <div className="p-10 h-full bg-sky-400/10">
+    <div className="p-10 h-full bg-sky-400/20 overflow-y-scroll">
       <h2 className="text-3xl mb-8"></h2>
       <div className="grid grid-cols-3 gap-4">
         <NewEntryCard />

@@ -9,7 +9,7 @@ const links = [
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-screen w-screen relative">
+    <div className="h-full w-screen relative">
       <aside className="absolute w-[200px] top-0 left-0 h-full border-r border-black/10">
         <div>EmoTrack</div>
         <ul>
@@ -26,7 +26,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <UserButton />
           </div>
         </header>
-        <div className="h-[calc(100vh-60px)]">{children}</div>
+        {/* h-[calc(100vh-60px)] */}
+        <div className="h-[calc(100vh-60px)] ">{children}</div>
       </div>
     </div>
   )
